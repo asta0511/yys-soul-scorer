@@ -1,0 +1,3523 @@
+{
+  "assumptions": [
+    "读取范围仅为强化页的 28 条方案名称与筛选配置。",
+    "游戏“副属性数量”映射为当前副属性条数，绝不按未强化时初始腿数解释。",
+    "游戏等级 0-2 的首档映射为 0、1、2 级。"
+  ],
+  "author": "铁血战士胖虎",
+  "authorSignature": null,
+  "changeSummary": "将原始胚子准入规则转换为纯手动多选规则卡片。",
+  "defaults": {
+    "continuationPolicyRef": "system.maturity-continuation-v1",
+    "level": [
+      0,
+      1,
+      2
+    ],
+    "quality": [
+      6
+    ]
+  },
+  "format": "yys-rule-preset",
+  "gameVersionRange": "*",
+  "id": "builtin.owner.default-manual",
+  "license": null,
+  "locale": "zh-CN",
+  "minimumAppVersion": "0.1.0",
+  "rawDescription": "按照参考规则整理的默认御魂评分标准。规则采用手动选择的套装、号位、主属性和副属性，不绑定具体御魂 ID；常用/少用与分组规则已转换为明确套装列表。v.16",
+  "rules": [
+    {
+      "candidateUses": [
+        "extreme-defense",
+        "fuyue-defense"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "extreme-defense-246",
+      "name": "135246极限防御四腿",
+      "rawLabel": "雪幽魂、被服、招财猫、日女巳时、镜姬、火灵、薙魂、木魅、阴摩罗、珍珠、蚌精、荒骷髅、地震鲶、蜃气楼、油赤子、雨降、青女房、涂佛、鬼灵歌伎、遗念火、共潜、出世螺、火之车、钓瓶火、奉海图、月之石、纺缘锤、稻荷穗箭、反枕、魅妖、土蜘蛛、夜荒魂、胧车 · 2、4、6、1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "defense_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "effect_resist",
+          "speed",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "defense_rate"
+          ],
+          "anyOf": [
+            "effect_resist",
+            "speed",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "被服",
+          "招财猫",
+          "日女巳时",
+          "镜姬",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "阴摩罗",
+          "珍珠",
+          "蚌精",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "油赤子",
+          "雨降",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "出世螺",
+          "火之车",
+          "钓瓶火",
+          "奉海图",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭",
+          "反枕",
+          "魅妖",
+          "土蜘蛛",
+          "夜荒魂",
+          "胧车"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          2,
+          4,
+          6,
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "extreme-attack"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "extreme-attack-246",
+      "name": "246极限攻击四腿",
+      "rawLabel": "雪幽魂、招财猫、镜姬、火灵、心眼、破势、狂骨、土蜘蛛、荒骷髅、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、涂佛、鬼灵歌伎、遗念火、共潜、贝吹坊、火之车、隐念、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、月之石、纺缘锤、稻荷穗箭、地震鲶、胧车、狰、蝠翼、鸣屋、阴摩罗、轮入道 · 2、4、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "crit_rate",
+          "crit_damage",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate"
+          ],
+          "anyOf": [
+            "crit_rate",
+            "crit_damage",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "招财猫",
+          "镜姬",
+          "火灵",
+          "心眼",
+          "破势",
+          "狂骨",
+          "土蜘蛛",
+          "荒骷髅",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "贝吹坊",
+          "火之车",
+          "隐念",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "八咫镜",
+          "天羽羽斩",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭",
+          "地震鲶",
+          "胧车",
+          "狰",
+          "蝠翼",
+          "鸣屋",
+          "阴摩罗",
+          "轮入道"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          2,
+          4,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slot6-crit-double-crit",
+      "name": "六号暴击双暴",
+      "rawLabel": "雪幽魂、地藏像、蝠翼、涅槃之火、三味、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "被服",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "钟灵",
+          "狰",
+          "火灵",
+          "鸣屋",
+          "薙魂",
+          "心眼",
+          "木魅",
+          "树妖",
+          "网切",
+          "阴摩罗",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "夜啼石",
+          "夜送犬",
+          "雨降",
+          "飞缘魔",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "crit_rate",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slot6-crit-damage-with-crit",
+      "name": "六号暴伤带暴击",
+      "rawLabel": "雪幽魂、地藏像、蝠翼、涅槃之火、三味、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "被服",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "钟灵",
+          "狰",
+          "火灵",
+          "鸣屋",
+          "薙魂",
+          "心眼",
+          "木魅",
+          "树妖",
+          "网切",
+          "阴摩罗",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "夜啼石",
+          "夜送犬",
+          "雨降",
+          "飞缘魔",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "crit-damage-cap",
+        "ji-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slot6-crit-damage-with-crit-damage",
+      "name": "六号暴伤带暴伤四腿",
+      "rawLabel": "雪幽魂、蝠翼、三味、被服、招财猫、轮入道、狰、火灵、鸣屋、心眼、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、蚌精、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、火之车、隐念、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_damage"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "蝠翼",
+          "三味",
+          "被服",
+          "招财猫",
+          "轮入道",
+          "狰",
+          "火灵",
+          "鸣屋",
+          "心眼",
+          "网切",
+          "阴摩罗",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "蚌精",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "火之车",
+          "隐念",
+          "应声虫",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "support-effect-hit"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "support-slot6-effect-hit",
+      "name": "辅助六号命中四腿",
+      "rawLabel": "雪幽魂、魍魉之匣、招财猫、反枕、钟灵、火灵、薙魂、木魅、蚌精、魅妖、返魂香、荒骷髅、蜃气楼、片叶之苇、油赤子、飞缘魔、涂佛、鬼灵歌伎、遗念火、共潜、隐念、元兴寺、钓瓶火、夜荒魂、无刀取、稻荷穗箭 · 6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_hit"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "effect_resist",
+          "speed",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_hit"
+          ],
+          "anyOf": [
+            "effect_resist",
+            "speed",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "魍魉之匣",
+          "招财猫",
+          "反枕",
+          "钟灵",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "蚌精",
+          "魅妖",
+          "返魂香",
+          "荒骷髅",
+          "蜃气楼",
+          "片叶之苇",
+          "油赤子",
+          "飞缘魔",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "隐念",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "survival-control"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "hp-26-hit-resist",
+      "name": "二六生命命抗四腿",
+      "rawLabel": "雪幽魂、招财猫、火灵、薙魂、木魅、蚌精、返魂香、油赤子、夜送犬、遗念火、共潜、钓瓶火 · 2、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_hit",
+          "effect_resist"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "hp_rate",
+          "defense_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_hit",
+            "effect_resist"
+          ],
+          "anyOf": [
+            "hp_rate",
+            "defense_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "招财猫",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "蚌精",
+          "返魂香",
+          "油赤子",
+          "夜送犬",
+          "遗念火",
+          "共潜",
+          "钓瓶火"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          2,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-135-double-crit",
+      "name": "常用一三五双暴",
+      "rawLabel": "雪幽魂、招财猫、火灵、鸣屋、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、蚌精、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "招财猫",
+          "火灵",
+          "鸣屋",
+          "心眼",
+          "网切",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "蚌精",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "uncommon-135-attack-double-crit",
+      "name": "少用一三五攻暴爆",
+      "rawLabel": "地藏像、蝠翼、涅槃之火、三味、被服、反枕、轮入道、日女巳时、镜姬、狰、薙魂、木魅、树妖、阴摩罗、骰子鬼、魅妖、夜啼石、夜送犬、雨降 · 1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "被服",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "狰",
+          "薙魂",
+          "木魅",
+          "树妖",
+          "阴摩罗",
+          "骰子鬼",
+          "魅妖",
+          "夜啼石",
+          "夜送犬",
+          "雨降"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-135-attack-crit",
+      "name": "常用一三五攻暴",
+      "rawLabel": "火灵、心眼、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "火灵",
+          "心眼",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "uncommon-135-attack-crit-four",
+      "name": "少用一三五攻暴四腿",
+      "rawLabel": "雪幽魂、地藏像、蝠翼、三味、招财猫、轮入道、狰、鸣屋、网切、阴摩罗、骰子鬼、蚌精、夜啼石、夜送犬、雨降、元兴寺、奉海图 · 1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "蝠翼",
+          "三味",
+          "招财猫",
+          "轮入道",
+          "狰",
+          "鸣屋",
+          "网切",
+          "阴摩罗",
+          "骰子鬼",
+          "蚌精",
+          "夜啼石",
+          "夜送犬",
+          "雨降",
+          "元兴寺",
+          "奉海图"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-damage-output",
+        "ji-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-135-attack-crit-damage-four",
+      "name": "常用一三五攻爆四腿",
+      "rawLabel": "火灵、心眼、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、火之车、隐念、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "火灵",
+          "心眼",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "火之车",
+          "隐念",
+          "应声虫",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "control-support"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slots1345-hit-resist",
+      "name": "一三四五命抗四腿",
+      "rawLabel": "雪幽魂、魍魉之匣、招财猫、火灵、薙魂、木魅、骰子鬼、蚌精、返魂香、幽谷响、油赤子、夜送犬、飞缘魔、遗念火、共潜、元兴寺、钓瓶火 · 1、3、4、5号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_hit",
+          "effect_resist"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_hit",
+            "effect_resist"
+          ],
+          "anyOf": [
+            "speed",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "魍魉之匣",
+          "招财猫",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "骰子鬼",
+          "蚌精",
+          "返魂香",
+          "幽谷响",
+          "油赤子",
+          "夜送犬",
+          "飞缘魔",
+          "遗念火",
+          "共潜",
+          "元兴寺",
+          "钓瓶火"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_resist",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          }
+        ],
+        "slots": [
+          1,
+          3,
+          4,
+          5
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "speed-control"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slot2-speed-effect-hit",
+      "name": "二号速度命中四腿",
+      "rawLabel": "雪幽魂、魍魉之匣、招财猫、反枕、日女巳时、钟灵、火灵、蚌精、魅妖、返魂香、荒骷髅、油赤子、飞缘魔、鬼灵歌伎、遗念火、共潜、元兴寺、钓瓶火、夜荒魂、稻荷穗箭 · 2号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_hit"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "effect_resist",
+          "hp_rate",
+          "crit_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_hit"
+          ],
+          "anyOf": [
+            "effect_resist",
+            "hp_rate",
+            "crit_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "魍魉之匣",
+          "招财猫",
+          "反枕",
+          "日女巳时",
+          "钟灵",
+          "火灵",
+          "蚌精",
+          "魅妖",
+          "返魂香",
+          "荒骷髅",
+          "油赤子",
+          "飞缘魔",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "extreme-effect-hit"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "slot4-hit-with-hit",
+      "name": "四号命中带命中四腿",
+      "rawLabel": "雪幽魂、魍魉之匣、招财猫、反枕、日女巳时、钟灵、火灵、鸣屋、薙魂、心眼、木魅、破势、蚌精、魅妖、返魂香、狂骨、土蜘蛛、荒骷髅、蜃气楼、片叶之苇、油赤子、夜送犬、飞缘魔、涂佛、鬼灵歌伎、遗念火、共潜、火之车、隐念、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、预言星盘、月之石、纺缘锤、稻荷穗箭 · 4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_hit"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "effect_resist",
+          "speed",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_hit"
+          ],
+          "anyOf": [
+            "effect_resist",
+            "speed",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "魍魉之匣",
+          "招财猫",
+          "反枕",
+          "日女巳时",
+          "钟灵",
+          "火灵",
+          "鸣屋",
+          "薙魂",
+          "心眼",
+          "木魅",
+          "破势",
+          "蚌精",
+          "魅妖",
+          "返魂香",
+          "狂骨",
+          "土蜘蛛",
+          "荒骷髅",
+          "蜃气楼",
+          "片叶之苇",
+          "油赤子",
+          "夜送犬",
+          "飞缘魔",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "火之车",
+          "隐念",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          }
+        ],
+        "slots": [
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-24-speed-attack-double-crit",
+      "name": "常用二速攻四攻双暴",
+      "rawLabel": "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "被服",
+          "火灵",
+          "心眼",
+          "网切",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "general-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "uncommon-24-speed-attack-double-crit-four",
+      "name": "少用二速攻四攻双暴四腿",
+      "rawLabel": "雪幽魂、蝠翼、涅槃之火、三味、魍魉之匣、招财猫、反枕、轮入道、日女巳时、镜姬、狰、鸣屋、薙魂、木魅、树妖、阴摩罗、骰子鬼、蚌精、魅妖、返魂香、幽谷响、夜啼石、夜送犬、雨降 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "attack_rate",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "attack_rate",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "魍魉之匣",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "狰",
+          "鸣屋",
+          "薙魂",
+          "木魅",
+          "树妖",
+          "阴摩罗",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "返魂香",
+          "幽谷响",
+          "夜啼石",
+          "夜送犬",
+          "雨降"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-24-speed-attack-attack-crit",
+      "name": "常用二速攻四攻攻暴",
+      "rawLabel": "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "crit_damage"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed",
+            "crit_damage"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "被服",
+          "火灵",
+          "心眼",
+          "网切",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "uncommon-24-speed-attack-attack-crit-four",
+      "name": "少用二速攻四攻攻暴四腿",
+      "rawLabel": "雪幽魂、蝠翼、涅槃之火、三味、魍魉之匣、招财猫、反枕、轮入道、日女巳时、镜姬、狰、鸣屋、薙魂、木魅、树妖、阴摩罗、骰子鬼、蚌精、魅妖、返魂香、幽谷响、夜啼石、夜送犬、雨降 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "crit_damage"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed",
+            "crit_damage"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "魍魉之匣",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "狰",
+          "鸣屋",
+          "薙魂",
+          "木魅",
+          "树妖",
+          "阴摩罗",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "返魂香",
+          "幽谷响",
+          "夜啼石",
+          "夜送犬",
+          "雨降"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "attack-crit-damage-output",
+        "ji-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "common-24-speed-attack-attack-crit-damage-four",
+      "name": "常用二速攻四攻攻爆四腿",
+      "rawLabel": "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "crit_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "speed",
+            "crit_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "被服",
+          "火灵",
+          "心眼",
+          "网切",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "针女",
+          "狂骨",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "healing-transfer",
+        "special-support"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "support-24-hp-double-crit-four",
+      "name": "辅助二四生命双暴四腿",
+      "rawLabel": "雪幽魂、地藏像、涅槃之火、被服、招财猫、镜姬、钟灵、火灵、薙魂、树妖、伤魂鸟、镇墓兽、珍珠、蚌精、地震鲶、蜃气楼、片叶之苇、油赤子、夜啼石、雨降、青女房、涂佛、遗念火、共潜、恶楼、海月火玉、出世螺、火之车、叠叩、钓瓶火、夜荒魂、无刀取、奉海图、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate",
+          "crit_damage"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "effect_resist",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate",
+            "crit_damage"
+          ],
+          "anyOf": [
+            "speed",
+            "effect_resist",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "涅槃之火",
+          "被服",
+          "招财猫",
+          "镜姬",
+          "钟灵",
+          "火灵",
+          "薙魂",
+          "树妖",
+          "伤魂鸟",
+          "镇墓兽",
+          "珍珠",
+          "蚌精",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "油赤子",
+          "夜啼石",
+          "雨降",
+          "青女房",
+          "涂佛",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "叠叩",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          }
+        ],
+        "slots": [
+          2,
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "reverse-build-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "reverse-slot6-attack-attack-crit",
+      "name": "六号攻击反堆攻暴",
+      "rawLabel": "心眼、伤魂鸟、针女、狂骨、荒骷髅、片叶之苇、尘冢、鬼灵歌伎、海月火玉、隐念、八咫镜、天羽羽斩 · 6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "attack_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "crit_damage",
+          "speed"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "attack_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "crit_damage",
+            "speed"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "心眼",
+          "伤魂鸟",
+          "针女",
+          "狂骨",
+          "荒骷髅",
+          "片叶之苇",
+          "尘冢",
+          "鬼灵歌伎",
+          "海月火玉",
+          "隐念",
+          "八咫镜",
+          "天羽羽斩"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "peacock-hit-crit"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "peacock-slot4-hit-crit-four",
+      "name": "孔雀四号命中暴击四腿",
+      "rawLabel": "轮入道、鸣屋、镇墓兽、针女、返魂香、狂骨、土蜘蛛、荒骷髅、片叶之苇、兵主部、鬼灵歌伎、隐念、无刀取、八咫镜、天羽羽斩 · 4号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "effect_resist",
+          "speed",
+          "hp_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "crit_rate"
+          ],
+          "anyOf": [
+            "effect_resist",
+            "speed",
+            "hp_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "轮入道",
+          "鸣屋",
+          "镇墓兽",
+          "针女",
+          "返魂香",
+          "狂骨",
+          "土蜘蛛",
+          "荒骷髅",
+          "片叶之苇",
+          "兵主部",
+          "鬼灵歌伎",
+          "隐念",
+          "无刀取",
+          "八咫镜",
+          "天羽羽斩"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          }
+        ],
+        "slots": [
+          4
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "sp-cat-resist-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "sp-cat-resist-output",
+      "name": "妙主九命猫抵抗输出",
+      "rawLabel": "地藏像、三味、魍魉之匣、招财猫、火灵、薙魂、木魅、网切、伤魂鸟、骰子鬼、返魂香、幽谷响、油赤子、夜送犬、青女房、遗念火、共潜、钓瓶火 · 1、2、3、4、5、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "effect_resist",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "crit_damage",
+          "attack_rate"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "effect_resist",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed",
+            "crit_damage",
+            "attack_rate"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "三味",
+          "魍魉之匣",
+          "招财猫",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "网切",
+          "伤魂鸟",
+          "骰子鬼",
+          "返魂香",
+          "幽谷响",
+          "油赤子",
+          "夜送犬",
+          "青女房",
+          "遗念火",
+          "共潜",
+          "钓瓶火"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_resist",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "fuyue-defense",
+        "pingjiangmen-defense-output"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "mountain-ping-defense-output",
+      "name": "岳与平将防御输出",
+      "rawLabel": "地藏像、招财猫、日女巳时、镜姬、火灵、薙魂、木魅、网切、伤魂鸟、珍珠、蚌精、狂骨、荒骷髅、片叶之苇、遗念火、贝吹坊、出世螺、火之车、隐念、钓瓶火、奉海图 · 1、2、3、4、5、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "defense_rate",
+          "crit_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "speed",
+          "crit_damage",
+          "effect_resist"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "defense_rate",
+            "crit_rate"
+          ],
+          "anyOf": [
+            "speed",
+            "crit_damage",
+            "effect_resist"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "地藏像",
+          "招财猫",
+          "日女巳时",
+          "镜姬",
+          "火灵",
+          "薙魂",
+          "木魅",
+          "网切",
+          "伤魂鸟",
+          "珍珠",
+          "蚌精",
+          "狂骨",
+          "荒骷髅",
+          "片叶之苇",
+          "遗念火",
+          "贝吹坊",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "钓瓶火",
+          "奉海图"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_resist",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "extreme-hp"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "extreme-hp-246",
+      "name": "246极限生命四腿",
+      "rawLabel": "薙魂、伤魂鸟、蚌精、荒骷髅、油赤子、青女房、隐念、奉海图 · 2、4、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "hp_rate"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [
+          "defense_rate",
+          "speed",
+          "effect_resist"
+        ],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "hp_rate"
+          ],
+          "anyOf": [
+            "defense_rate",
+            "speed",
+            "effect_resist"
+          ],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "薙魂",
+          "伤魂鸟",
+          "蚌精",
+          "荒骷髅",
+          "油赤子",
+          "青女房",
+          "隐念",
+          "奉海图"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          2,
+          4,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "slot2-double-speed"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "head-embryo",
+      "name": "二号位双速度头胚子",
+      "rawLabel": "雪幽魂、地藏像、蝠翼、涅槃之火、三味、魍魉之匣、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、返魂香、狂骨、幽谷响、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "speed"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          3,
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "speed"
+          ],
+          "anyOf": [],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "魍魉之匣",
+          "被服",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "钟灵",
+          "狰",
+          "火灵",
+          "鸣屋",
+          "薙魂",
+          "心眼",
+          "木魅",
+          "树妖",
+          "网切",
+          "阴摩罗",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "针女",
+          "返魂香",
+          "狂骨",
+          "幽谷响",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "夜啼石",
+          "夜送犬",
+          "雨降",
+          "飞缘魔",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          }
+        ],
+        "slots": [
+          2
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    },
+    {
+      "candidateUses": [
+        "speed-cap"
+      ],
+      "evidenceLevel": "author",
+      "expression": null,
+      "gameVersionRange": null,
+      "id": "speed-embryo-four",
+      "name": "四腿速度胚子",
+      "rawLabel": "雪幽魂、地藏像、蝠翼、涅槃之火、三味、魍魉之匣、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、返魂香、狂骨、幽谷响、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、2、3、4、5、6号位 · ALL",
+      "scoring": {
+        "coreAttributeWeight": 10.0,
+        "coreAttributes": [
+          "speed"
+        ],
+        "discardScore": 0.0,
+        "enhancementCoreWeight": 10.0,
+        "enhancementGeneralWeight": 5.0,
+        "generalAttributeWeight": 5.0,
+        "generalAttributes": [],
+        "keepScore": 70.0,
+        "observeScore": 50.0
+      },
+      "selector": {
+        "all": [],
+        "any": [],
+        "forbiddenSubstats": [],
+        "initialSubstatCounts": [
+          4
+        ],
+        "level": [
+          0,
+          1,
+          2
+        ],
+        "mainAttributes": [],
+        "not": null,
+        "quality": [
+          6
+        ],
+        "requiredSubstats": {
+          "allOf": [
+            "speed"
+          ],
+          "anyOf": [],
+          "atLeast": null
+        },
+        "scenarios": [],
+        "setCommonness": [],
+        "setGroupIds": [],
+        "setIds": [
+          "雪幽魂",
+          "地藏像",
+          "蝠翼",
+          "涅槃之火",
+          "三味",
+          "魍魉之匣",
+          "被服",
+          "招财猫",
+          "反枕",
+          "轮入道",
+          "日女巳时",
+          "镜姬",
+          "钟灵",
+          "狰",
+          "火灵",
+          "鸣屋",
+          "薙魂",
+          "心眼",
+          "木魅",
+          "树妖",
+          "网切",
+          "阴摩罗",
+          "伤魂鸟",
+          "破势",
+          "镇墓兽",
+          "珍珠",
+          "骰子鬼",
+          "蚌精",
+          "魅妖",
+          "针女",
+          "返魂香",
+          "狂骨",
+          "幽谷响",
+          "土蜘蛛",
+          "胧车",
+          "荒骷髅",
+          "地震鲶",
+          "蜃气楼",
+          "片叶之苇",
+          "尘冢",
+          "油赤子",
+          "夜啼石",
+          "夜送犬",
+          "雨降",
+          "飞缘魔",
+          "兵主部",
+          "青女房",
+          "涂佛",
+          "鬼灵歌伎",
+          "遗念火",
+          "共潜",
+          "恶楼",
+          "贝吹坊",
+          "海月火玉",
+          "出世螺",
+          "火之车",
+          "隐念",
+          "叠叩",
+          "应声虫",
+          "元兴寺",
+          "钓瓶火",
+          "夜荒魂",
+          "无刀取",
+          "奉海图",
+          "八咫镜",
+          "天羽羽斩",
+          "预言星盘",
+          "月之石",
+          "纺缘锤",
+          "稻荷穗箭"
+        ],
+        "slotMainPairs": [
+          {
+            "mainAttribute": "attack_flat",
+            "slot": 1
+          },
+          {
+            "mainAttribute": "speed",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 2
+          },
+          {
+            "mainAttribute": "defense_flat",
+            "slot": 3
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_hit",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "effect_resist",
+            "slot": 4
+          },
+          {
+            "mainAttribute": "hp_flat",
+            "slot": 5
+          },
+          {
+            "mainAttribute": "attack_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "hp_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "defense_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_rate",
+            "slot": 6
+          },
+          {
+            "mainAttribute": "crit_damage",
+            "slot": 6
+          }
+        ],
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "substatCounts": []
+      },
+      "sourceRefs": [],
+      "stage": "admission",
+      "status": "draft"
+    }
+  ],
+  "schemaVersion": 1,
+  "scoreColorThresholds": {
+    "goldScore": 70.0,
+    "jadeScore": 60.0,
+    "rainbowScore": 75.0
+  },
+  "sourceRefs": [
+    "MuMu ADB 127.0.0.1:16416（临时探针，2026-09-10）"
+  ],
+  "sourceText": [
+    "雪幽魂、被服、招财猫、日女巳时、镜姬、火灵、薙魂、木魅、阴摩罗、珍珠、蚌精、荒骷髅、地震鲶、蜃气楼、油赤子、雨降、青女房、涂佛、鬼灵歌伎、遗念火、共潜、出世螺、火之车、钓瓶火、奉海图、月之石、纺缘锤、稻荷穗箭、反枕、魅妖、土蜘蛛、夜荒魂、胧车 · 2、4、6、1、3、5号位 · ALL",
+    "雪幽魂、招财猫、镜姬、火灵、心眼、破势、狂骨、土蜘蛛、荒骷髅、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、涂佛、鬼灵歌伎、遗念火、共潜、贝吹坊、火之车、隐念、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、月之石、纺缘锤、稻荷穗箭、地震鲶、胧车、狰、蝠翼、鸣屋、阴摩罗、轮入道 · 2、4、6号位 · ALL",
+    "雪幽魂、地藏像、蝠翼、涅槃之火、三味、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+    "雪幽魂、地藏像、蝠翼、涅槃之火、三味、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+    "雪幽魂、蝠翼、三味、被服、招财猫、轮入道、狰、火灵、鸣屋、心眼、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、蚌精、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、火之车、隐念、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 6号位 · ALL",
+    "雪幽魂、魍魉之匣、招财猫、反枕、钟灵、火灵、薙魂、木魅、蚌精、魅妖、返魂香、荒骷髅、蜃气楼、片叶之苇、油赤子、飞缘魔、涂佛、鬼灵歌伎、遗念火、共潜、隐念、元兴寺、钓瓶火、夜荒魂、无刀取、稻荷穗箭 · 6号位 · ALL",
+    "雪幽魂、招财猫、火灵、薙魂、木魅、蚌精、返魂香、油赤子、夜送犬、遗念火、共潜、钓瓶火 · 2、6号位 · ALL",
+    "雪幽魂、招财猫、火灵、鸣屋、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、蚌精、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+    "地藏像、蝠翼、涅槃之火、三味、被服、反枕、轮入道、日女巳时、镜姬、狰、薙魂、木魅、树妖、阴摩罗、骰子鬼、魅妖、夜啼石、夜送犬、雨降 · 1、3、5号位 · ALL",
+    "火灵、心眼、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+    "雪幽魂、地藏像、蝠翼、三味、招财猫、轮入道、狰、鸣屋、网切、阴摩罗、骰子鬼、蚌精、夜啼石、夜送犬、雨降、元兴寺、奉海图 · 1、3、5号位 · ALL",
+    "火灵、心眼、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、火之车、隐念、应声虫、钓瓶火、夜荒魂、无刀取、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、3、5号位 · ALL",
+    "雪幽魂、魍魉之匣、招财猫、火灵、薙魂、木魅、骰子鬼、蚌精、返魂香、幽谷响、油赤子、夜送犬、飞缘魔、遗念火、共潜、元兴寺、钓瓶火 · 1、3、4、5号位 · ALL",
+    "雪幽魂、魍魉之匣、招财猫、反枕、日女巳时、钟灵、火灵、蚌精、魅妖、返魂香、荒骷髅、油赤子、飞缘魔、鬼灵歌伎、遗念火、共潜、元兴寺、钓瓶火、夜荒魂、稻荷穗箭 · 2号位 · ALL",
+    "雪幽魂、魍魉之匣、招财猫、反枕、日女巳时、钟灵、火灵、鸣屋、薙魂、心眼、木魅、破势、蚌精、魅妖、返魂香、狂骨、土蜘蛛、荒骷髅、蜃气楼、片叶之苇、油赤子、夜送犬、飞缘魔、涂佛、鬼灵歌伎、遗念火、共潜、火之车、隐念、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、预言星盘、月之石、纺缘锤、稻荷穗箭 · 4号位 · ALL",
+    "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+    "雪幽魂、蝠翼、涅槃之火、三味、魍魉之匣、招财猫、反枕、轮入道、日女巳时、镜姬、狰、鸣屋、薙魂、木魅、树妖、阴摩罗、骰子鬼、蚌精、魅妖、返魂香、幽谷响、夜啼石、夜送犬、雨降 · 2、4号位 · ALL",
+    "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+    "雪幽魂、蝠翼、涅槃之火、三味、魍魉之匣、招财猫、反枕、轮入道、日女巳时、镜姬、狰、鸣屋、薙魂、木魅、树妖、阴摩罗、骰子鬼、蚌精、魅妖、返魂香、幽谷响、夜啼石、夜送犬、雨降 · 2、4号位 · ALL",
+    "地藏像、被服、火灵、心眼、网切、伤魂鸟、破势、镇墓兽、珍珠、针女、狂骨、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+    "雪幽魂、地藏像、涅槃之火、被服、招财猫、镜姬、钟灵、火灵、薙魂、树妖、伤魂鸟、镇墓兽、珍珠、蚌精、地震鲶、蜃气楼、片叶之苇、油赤子、夜啼石、雨降、青女房、涂佛、遗念火、共潜、恶楼、海月火玉、出世螺、火之车、叠叩、钓瓶火、夜荒魂、无刀取、奉海图、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2、4号位 · ALL",
+    "心眼、伤魂鸟、针女、狂骨、荒骷髅、片叶之苇、尘冢、鬼灵歌伎、海月火玉、隐念、八咫镜、天羽羽斩 · 6号位 · ALL",
+    "轮入道、鸣屋、镇墓兽、针女、返魂香、狂骨、土蜘蛛、荒骷髅、片叶之苇、兵主部、鬼灵歌伎、隐念、无刀取、八咫镜、天羽羽斩 · 4号位 · ALL",
+    "地藏像、三味、魍魉之匣、招财猫、火灵、薙魂、木魅、网切、伤魂鸟、骰子鬼、返魂香、幽谷响、油赤子、夜送犬、青女房、遗念火、共潜、钓瓶火 · 1、2、3、4、5、6号位 · ALL",
+    "地藏像、招财猫、日女巳时、镜姬、火灵、薙魂、木魅、网切、伤魂鸟、珍珠、蚌精、狂骨、荒骷髅、片叶之苇、遗念火、贝吹坊、出世螺、火之车、隐念、钓瓶火、奉海图 · 1、2、3、4、5、6号位 · ALL",
+    "薙魂、伤魂鸟、蚌精、荒骷髅、油赤子、青女房、隐念、奉海图 · 2、4、6号位 · ALL",
+    "雪幽魂、地藏像、蝠翼、涅槃之火、三味、魍魉之匣、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、返魂香、狂骨、幽谷响、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 2号位 · ALL",
+    "雪幽魂、地藏像、蝠翼、涅槃之火、三味、魍魉之匣、被服、招财猫、反枕、轮入道、日女巳时、镜姬、钟灵、狰、火灵、鸣屋、薙魂、心眼、木魅、树妖、网切、阴摩罗、伤魂鸟、破势、镇墓兽、珍珠、骰子鬼、蚌精、魅妖、针女、返魂香、狂骨、幽谷响、土蜘蛛、胧车、荒骷髅、地震鲶、蜃气楼、片叶之苇、尘冢、油赤子、夜啼石、夜送犬、雨降、飞缘魔、兵主部、青女房、涂佛、鬼灵歌伎、遗念火、共潜、恶楼、贝吹坊、海月火玉、出世螺、火之车、隐念、叠叩、应声虫、元兴寺、钓瓶火、夜荒魂、无刀取、奉海图、八咫镜、天羽羽斩、预言星盘、月之石、纺缘锤、稻荷穗箭 · 1、2、3、4、5、6号位 · ALL"
+  ],
+  "status": "draft",
+  "title": "中练度标准",
+  "version": "0.2.0"
+}

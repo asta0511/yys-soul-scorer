@@ -1,0 +1,22 @@
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 运行产物：截图、标注图、导出的 JSON / CSV
+output/
+temp/
+
+# 编辑器 / 工具配置
+.idea/
+.vscode/
+.trae/
+
+# 系统文件
+Thumbs.db
+desktop.ini
