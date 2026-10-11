@@ -53,7 +53,30 @@ SCALE = 2
 
 KIND_LABEL = {"main": "主属性", "sub": "副属性", "innate": "固有"}
 VERDICT_TAG = {"留": "keep", "观察": "observe", "弃": "discard"}
-VERDICT_HEX = {"留": "#1c7c33", "观察": "#b26a00", "弃": "#777777"}
+
+# 视觉令牌：极简 / 瑞士风格 + Navy professional 调色板（ui-ux-pro-max）。
+# 主文字 #0F172A 与次要文字 #475569 对各自底色都在 WCAG AA 4.5:1 以上，
+# 改色前先按对比度复算；按钮、输入框都留 1px 可见描边 + 焦点圈。
+COLOR = {
+    "bg": "#F8FAFC",
+    "card": "#FFFFFF",
+    "fg": "#0F172A",
+    "muted_fg": "#475569",
+    "border": "#E4E7EB",
+    "control_border": "#94A3B8",
+    "hover": "#F1F5F9",
+    "primary": "#1E3A5F",
+    "on_primary": "#FFFFFF",
+    "ring": "#1E3A5F",
+    "select": "#DBEAFE",
+    "canvas": "#1E1E1E",
+    "canvas_hint": "#94A3B8",
+    "disabled_fg": "#94A3B8",
+}
+# 建议只靠底色区分，文字始终是最高对比的 #0F172A——不靠颜色单独传达信息。
+VERDICT_ROW = {"留": "#E4F6E7", "观察": "#FDF3DC", "弃": "#F2F2F2"}
+# 截图是深底，预览上的方框要用亮色（非文字元素按 3:1 取）
+VERDICT_MARK = {"留": "#4ADE80", "观察": "#FBBF24", "弃": "#94A3B8"}
 VERDICT_BGR = {"留": (60, 170, 60), "观察": (0, 150, 230), "弃": (150, 150, 150)}
 
 MODE_LABEL = {
@@ -87,10 +110,14 @@ class SoulScorerApp:
         self.photo: ImageTk.PhotoImage | None = None
         self.image_scale = 1.0
         self.card_boxes: list[tuple[float, float, float, float, int]] = []
+        self.selected_index = -1
         self._last_canvas_size = (0, 0)
+        self.elapsed = 0.0
+        self.started_at = 0.0
 
         self.ui_font = ("Microsoft YaHei UI", 9)
         self.small_font = ("Microsoft YaHei UI", 8)
+        self.title_font = ("Microsoft YaHei UI", 12, "bold")
 
         root.title(APP_TITLE)
         root.geometry("1280x820")
@@ -99,40 +126,137 @@ class SoulScorerApp:
         self._build_toolbar()
         self._build_status()
         self._build_body()
+        self._bind_shortcuts()
         self.refresh_windows()
 
     # ------------------------------------------------------------------ 界面搭建
 
     def _init_style(self) -> None:
         style = ttk.Style()
-        style.configure("Treeview", font=self.ui_font, rowheight=22)
-        style.configure("Treeview.Heading", font=self.ui_font)
-        style.configure("TNotebook.Tab", font=self.ui_font, padding=(10, 4))
-        style.configure("TButton", font=self.ui_font)
+        style.theme_use("clam")
+        self.root.configure(background=COLOR["bg"])
+
+        style.configure(
+            ".", background=COLOR["bg"], foreground=COLOR["fg"], font=self.ui_font,
+            bordercolor=COLOR["border"], focuscolor=COLOR["ring"],
+        )
+        style.configure("TFrame", background=COLOR["bg"])
+        style.configure("TLabel", background=COLOR["bg"], foreground=COLOR["fg"], font=self.ui_font)
+        style.configure("Hint.TLabel", background=COLOR["bg"], foreground=COLOR["muted_fg"], font=self.small_font)
+
+        # 按钮：白底 + 可见描边，悬停/按下/禁用都有明确状态，按下不改变外框尺寸
+        style.configure(
+            "TButton", font=self.ui_font, padding=(10, 5), background=COLOR["card"],
+            foreground=COLOR["fg"], bordercolor=COLOR["control_border"], focusthickness=2,
+            relief="flat",
+        )
+        style.map(
+            "TButton",
+            background=[("pressed", COLOR["hover"]), ("active", COLOR["hover"]), ("disabled", COLOR["bg"])],
+            foreground=[("disabled", COLOR["disabled_fg"])],
+            bordercolor=[("focus", COLOR["ring"])],
+        )
+        # 主操作按钮：深蓝实底 + 白字（11.5:1，远超 AA）
+        style.configure(
+            "Accent.TButton", font=self.ui_font, padding=(12, 5), background=COLOR["primary"],
+            foreground=COLOR["on_primary"], bordercolor=COLOR["primary"], focusthickness=2, relief="flat",
+        )
+        style.map(
+            "Accent.TButton",
+            background=[("pressed", "#16304F"), ("active", "#25496F"), ("disabled", COLOR["disabled_fg"])],
+            foreground=[("disabled", COLOR["card"])],
+        )
+        style.configure(
+            "TCombobox", padding=4, fieldbackground=COLOR["card"], background=COLOR["card"],
+            arrowcolor=COLOR["muted_fg"], bordercolor=COLOR["control_border"],
+            lightcolor=COLOR["card"], darkcolor=COLOR["card"],
+        )
+        style.map(
+            "TCombobox",
+            fieldbackground=[("readonly", COLOR["card"])],
+            background=[("readonly", COLOR["card"]), ("active", COLOR["hover"])],
+            arrowcolor=[("disabled", COLOR["disabled_fg"])],
+            bordercolor=[("focus", COLOR["ring"])],
+        )
+        # 下拉展开的那张列表不是 ttk 控件，只能用选项库染色
+        self.root.option_add("*TCombobox*Listbox.background", COLOR["card"])
+        self.root.option_add("*TCombobox*Listbox.foreground", COLOR["fg"])
+        self.root.option_add("*TCombobox*Listbox.selectBackground", COLOR["select"])
+        self.root.option_add("*TCombobox*Listbox.selectForeground", COLOR["fg"])
+        self.root.option_add("*TCombobox*Listbox.font", self.ui_font)
+
+        style.configure(
+            "Treeview", font=self.ui_font, rowheight=24, background=COLOR["card"],
+            fieldbackground=COLOR["card"], foreground=COLOR["fg"], bordercolor=COLOR["border"],
+            lightcolor=COLOR["card"], darkcolor=COLOR["card"],
+        )
+        style.map(
+            "Treeview",
+            background=[("selected", COLOR["select"])],
+            foreground=[("selected", COLOR["fg"])],
+        )
+        style.configure(
+            "Treeview.Heading", font=self.ui_font, padding=(6, 5), background=COLOR["hover"],
+            foreground=COLOR["muted_fg"], relief="flat", bordercolor=COLOR["border"],
+        )
+        style.map("Treeview.Heading", background=[("active", "#E2E8F0")])
+
+        style.configure(
+            "TNotebook", background=COLOR["bg"], bordercolor=COLOR["border"], tabmargins=(8, 6, 8, 0),
+        )
+        style.configure(
+            "TNotebook.Tab", font=self.ui_font, padding=(12, 5), background=COLOR["bg"],
+            foreground=COLOR["muted_fg"], bordercolor=COLOR["border"],
+        )
+        style.map(
+            "TNotebook.Tab",
+            background=[("selected", COLOR["card"])],
+            foreground=[("selected", COLOR["fg"])],
+        )
+        style.configure("TPanedwindow", background=COLOR["bg"], sashwidth=6)
+        style.configure(
+            "TProgressbar", background=COLOR["primary"], troughcolor=COLOR["hover"],
+            bordercolor=COLOR["border"], thickness=10,
+        )
+
+    def _bind_shortcuts(self) -> None:
+        self.root.bind("<F5>", lambda _event: self._analyze_window())
+        self.root.bind("<Control-o>", lambda _event: self._analyze_image())
+        self.root.bind("<Control-r>", lambda _event: self.refresh_windows())
 
     def _build_toolbar(self) -> None:
-        bar = ttk.Frame(self.root, padding=(8, 6, 8, 2))
+        header = ttk.Frame(self.root, padding=(12, 10, 12, 0))
+        header.pack(side="top", fill="x")
+        ttk.Label(header, text=APP_TITLE, font=self.title_font).pack(side="left")
+        ttk.Label(header, text="看屏幕算分数 · 不注入进程、不模拟点击", style="Hint.TLabel").pack(
+            side="left", padx=(10, 0)
+        )
+
+        bar = ttk.Frame(self.root, padding=(12, 8, 12, 4))
         bar.pack(side="top", fill="x")
 
-        ttk.Label(bar, text="游戏窗口", font=self.ui_font).pack(side="left")
+        ttk.Label(bar, text="游戏窗口").pack(side="left")
         self.window_box = ttk.Combobox(bar, state="readonly", width=44, font=self.ui_font)
-        self.window_box.pack(side="left", padx=(6, 4))
+        self.window_box.pack(side="left", padx=(8, 4))
 
-        self.refresh_button = ttk.Button(bar, text="刷新", width=6, command=self.refresh_windows)
+        self.refresh_button = ttk.Button(bar, text="刷新 (Ctrl+R)", width=12, command=self.refresh_windows)
         self.refresh_button.pack(side="left")
-        self.analyze_button = ttk.Button(bar, text="开始分析", command=self._analyze_window)
+        self.analyze_button = ttk.Button(
+            bar, text="开始分析 (F5)", style="Accent.TButton", command=self._analyze_window
+        )
         self.analyze_button.pack(side="left", padx=(10, 4))
-        self.open_button = ttk.Button(bar, text="打开截图…", command=self._analyze_image)
+        self.open_button = ttk.Button(bar, text="打开截图… (Ctrl+O)", command=self._analyze_image)
         self.open_button.pack(side="left")
 
         self.progress = ttk.Progressbar(bar, mode="indeterminate", length=110)
         self.progress.pack(side="left", padx=12)
 
     def _build_status(self) -> None:
-        bar = ttk.Frame(self.root, padding=(8, 4, 8, 8))
+        bar = ttk.Frame(self.root, padding=(12, 6, 12, 8))
         bar.pack(side="bottom", fill="x")
+        ttk.Separator(self.root, orient="horizontal").pack(side="bottom", fill="x")
 
-        self.status_text = ttk.Label(bar, text="就绪", font=self.ui_font, foreground="#444")
+        self.status_text = ttk.Label(bar, text="就绪", style="Hint.TLabel")
         self.status_text.pack(side="left")
 
         self.export_buttons = []
@@ -142,32 +266,32 @@ class SoulScorerApp:
             ("导出 CSV", self._export_csv),
         ):
             button = ttk.Button(bar, text=text, width=11, command=command)
-            button.pack(side="right", padx=(4, 0))
+            button.pack(side="right", padx=(8, 0))
             self.export_buttons.append(button)
 
     def _build_body(self) -> None:
         outer = ttk.PanedWindow(self.root, orient="horizontal")
-        outer.pack(side="top", fill="both", expand=True, padx=8, pady=4)
+        outer.pack(side="top", fill="both", expand=True, padx=12, pady=(0, 4))
 
         left = ttk.Frame(outer)
-        ttk.Label(
-            left, text="截图预览（点方框可选中对应御魂）", font=self.small_font, foreground="#777"
-        ).pack(anchor="w", pady=(0, 2))
-        self.preview = tk.Canvas(left, background="#1e1e1e", highlightthickness=0)
+        ttk.Label(left, text="截图预览（点方框可选中对应御魂）", style="Hint.TLabel").pack(
+            anchor="w", pady=(0, 4)
+        )
+        self.preview = tk.Canvas(left, background=COLOR["canvas"], highlightthickness=0)
         self.preview.pack(fill="both", expand=True)
         self.preview.bind("<Button-1>", self._on_preview_click)
+        self.preview.bind("<Motion>", self._on_preview_motion)
         self.preview.bind("<Configure>", self._on_preview_resize)
         outer.add(left, weight=5)
 
         right = ttk.PanedWindow(outer, orient="vertical")
 
         list_frame = ttk.Frame(right)
-        ttk.Label(list_frame, text="御魂列表", font=self.small_font, foreground="#777").pack(
-            anchor="w", pady=(0, 2)
-        )
+        ttk.Label(list_frame, text="御魂列表", style="Hint.TLabel").pack(anchor="w", pady=(0, 4))
         columns = ("no", "set", "slot", "main", "score", "verdict")
         headings = ("#", "套装", "号位", "主属性", "评分", "建议")
         widths = (34, 150, 80, 80, 52, 52)
+        anchors = {"set": "w", "score": "e"}
         self.soul_tree = ttk.Treeview(
             list_frame, columns=columns, show="headings", height=8, selectmode="browse"
         )
@@ -176,14 +300,12 @@ class SoulScorerApp:
             self.soul_tree.column(
                 name,
                 width=width,
-                anchor="w" if name == "set" else "center",
+                anchor=anchors.get(name, "center"),
                 stretch=(name == "set"),
             )
         for verdict, tag in VERDICT_TAG.items():
-            self.soul_tree.tag_configure(tag, background={
-                "留": "#e4f6e7", "观察": "#fdf3dc", "弃": "#f2f2f2",
-            }[verdict])
-        self.soul_tree.tag_configure("none", background="#ffffff")
+            self.soul_tree.tag_configure(tag, background=VERDICT_ROW[verdict])
+        self.soul_tree.tag_configure("none", background=COLOR["card"])
 
         scroll = ttk.Scrollbar(list_frame, orient="vertical", command=self.soul_tree.yview)
         self.soul_tree.configure(yscrollcommand=scroll.set)
@@ -198,14 +320,18 @@ class SoulScorerApp:
         attr_columns = ("kind", "name", "old", "final", "enhance", "conf")
         attr_headings = ("类型", "属性名", "旧值", "最终值", "强化", "置信度")
         attr_widths = (60, 90, 90, 90, 50, 60)
+        attr_anchors = {"name": "w", "old": "e", "final": "e", "conf": "e"}
         self.attr_tree = ttk.Treeview(
             attr_tab, columns=attr_columns, show="headings", height=6
         )
         for name, head, width in zip(attr_columns, attr_headings, attr_widths):
             self.attr_tree.heading(name, text=head)
             self.attr_tree.column(
-                name, width=width, anchor="w" if name == "name" else "center", stretch=False
+                name, width=width, anchor=attr_anchors.get(name, "center"), stretch=False
             )
+        # 主属性单独一层底色，和副属性/固有属性区分开
+        self.attr_tree.tag_configure("main", background="#E2E8F0")
+        self.attr_tree.tag_configure("other", background=COLOR["card"])
         attr_scroll = ttk.Scrollbar(attr_tab, orient="vertical", command=self.attr_tree.yview)
         self.attr_tree.configure(yscrollcommand=attr_scroll.set)
         attr_scroll.pack(side="right", fill="y")
@@ -214,8 +340,8 @@ class SoulScorerApp:
 
         score_tab = ttk.Frame(notebook)
         self.score_text = tk.Text(
-            score_tab, wrap="word", font=self.ui_font, background="#fbfbfb",
-            relief="flat", padx=10, pady=8,
+            score_tab, wrap="word", font=self.ui_font, background=COLOR["card"],
+            foreground=COLOR["fg"], relief="flat", padx=12, pady=8,
         )
         score_scroll = ttk.Scrollbar(score_tab, orient="vertical", command=self.score_text.yview)
         self.score_text.configure(yscrollcommand=score_scroll.set, state="disabled")
@@ -273,6 +399,7 @@ class SoulScorerApp:
         if self.busy:
             return
         self.busy = True
+        self.started_at = time.perf_counter()
         self._set_buttons_enabled(False)
         self._set_status("分析中…（首次运行要先加载 OCR 模型，会慢几秒）")
         threading.Thread(target=self._worker, args=(get_frame, title), daemon=True).start()
@@ -284,21 +411,24 @@ class SoulScorerApp:
         except Exception as exc:  # 抓窗口、OCR 都可能抛，统一报给用户
             self.root.after(0, self._on_failed, exc)
             return
-        self.root.after(0, self._on_done, frame, analysis, title)
+        elapsed = time.perf_counter() - self.started_at
+        self.root.after(0, self._on_done, frame, analysis, title, elapsed)
 
     def _on_failed(self, exc: Exception) -> None:
         self.busy = False
         self._set_buttons_enabled(True)
-        self._set_status("分析失败")
+        # 状态栏留在界面上（不只弹窗），窗口最小化或弹窗被关掉时也还能看到原因
+        self._set_status(f"分析失败：{exc}")
         hint = ""
         if not isinstance(exc, AnalysisError):
             hint = "\n\n如果是抓不到画面，确认游戏窗口没有最小化，且停在御魂强化结果页。"
         messagebox.showerror(APP_TITLE, f"分析失败：{exc}{hint}")
 
-    def _on_done(self, frame: np.ndarray, analysis: PanelAnalysis, title: str) -> None:
+    def _on_done(self, frame: np.ndarray, analysis: PanelAnalysis, title: str, elapsed: float) -> None:
         self.frame = frame
         self.analysis = analysis
         self.source_title = title
+        self.elapsed = elapsed
         self.busy = False
         self._set_buttons_enabled(True)
 
@@ -311,7 +441,8 @@ class SoulScorerApp:
 
         mode = MODE_LABEL.get(analysis.mode, "单个御魂")
         self._set_status(
-            f"{title}    {frame.shape[1]}x{frame.shape[0]}    {mode}    {len(analysis.souls)} 件"
+            f"{title}    {frame.shape[1]}x{frame.shape[0]}    {mode}    "
+            f"{len(analysis.souls)} 件    耗时 {elapsed:.1f}s"
         )
 
     def _set_buttons_enabled(self, enabled: bool) -> None:
@@ -340,12 +471,11 @@ class SoulScorerApp:
         canvas = self.preview
         canvas.delete("all")
         self.photo = None
-        self.card_boxes.clear()
 
         width, height = canvas.winfo_width(), canvas.winfo_height()
         if self.frame is None:
             canvas.create_text(
-                24, 24, anchor="nw", fill="#9a9a9a", font=self.ui_font,
+                24, 24, anchor="nw", fill=COLOR["canvas_hint"], font=self.ui_font,
                 text="还没有截图。\n\n选一个游戏窗口后点「开始分析」，或用「打开截图…」读一张已有的图。",
             )
             return
@@ -356,24 +486,48 @@ class SoulScorerApp:
         self.photo = photo
         self.image_scale = scale
         canvas.create_image(0, 0, anchor="nw", image=photo)
+        self._draw_boxes()
 
+    def _draw_boxes(self) -> None:
+        """画每件御魂的方框；选中的那个加粗并配一个实底标签，和右侧列表一一对应。"""
+        canvas = self.preview
+        canvas.delete("box")
+        self.card_boxes.clear()
         if self.analysis is None:
             return
+        scale = self.image_scale
         for soul in self.analysis.souls:
             box = soul.box
             if box is None:
                 continue
             x0, y0 = box.x * scale, box.y * scale
             x1, y1 = box.x1 * scale, box.y1 * scale
-            verdict = soul.result.verdict if soul.result else ""
-            score = f"{soul.result.score:.0f}" if soul.result else "—"
-            color = VERDICT_HEX.get(verdict, "#3a7bd5")
-            canvas.create_rectangle(x0, y0, x1, y1, outline=color, width=2)
-            canvas.create_text(
-                x0 + 2, y0 + 2, anchor="nw", fill=color, font=self.small_font,
-                text=f"{soul.index + 1} · {score} {verdict}",
+            result = soul.result
+            mark = VERDICT_MARK.get(result.verdict if result else "", "#60A5FA")
+            selected = soul.index == self.selected_index
+            canvas.create_rectangle(
+                x0, y0, x1, y1, outline=mark, width=3 if selected else 2, tags="box"
             )
+            label = f"{soul.index + 1} · {result.score:.0f} {result.verdict}" if result else f"{soul.index + 1}"
+            text_id = canvas.create_text(
+                x0 + 6, y0 + 6, anchor="nw", fill=mark, font=self.small_font,
+                text=label, tags="box",
+            )
+            if selected:
+                bounds = canvas.bbox(text_id)
+                if bounds:
+                    chip = canvas.create_rectangle(
+                        bounds[0] - 4, bounds[1] - 2, bounds[2] + 4, bounds[3] + 2,
+                        fill=COLOR["canvas"], outline=mark, tags="box",
+                    )
+                    canvas.tag_lower(chip, text_id)
             self.card_boxes.append((x0, y0, x1, y1, soul.index))
+
+    def _on_preview_motion(self, event) -> None:
+        over = any(x0 <= event.x <= x1 and y0 <= event.y <= y1 for x0, y0, x1, y1, _ in self.card_boxes)
+        cursor = "hand2" if over else ""
+        if self.preview["cursor"] != cursor:
+            self.preview.configure(cursor=cursor)
 
     def _on_preview_click(self, event) -> None:
         for x0, y0, x1, y1, index in self.card_boxes:
@@ -424,6 +578,8 @@ class SoulScorerApp:
             self._show_detail(int(selection[0]))
 
     def _clear_detail(self) -> None:
+        self.selected_index = -1
+        self._draw_boxes()
         self.attr_tree.delete(*self.attr_tree.get_children())
         self.score_text.configure(state="normal")
         self.score_text.delete("1.0", "end")
@@ -434,6 +590,9 @@ class SoulScorerApp:
             self._clear_detail()
             return
         soul = self.analysis.souls[index]
+        if index != self.selected_index:
+            self.selected_index = index
+            self._draw_boxes()
 
         self.attr_tree.delete(*self.attr_tree.get_children())
         for row_index, item in soul.indexed:
@@ -452,6 +611,7 @@ class SoulScorerApp:
                     mark,
                     f"{item['score']:.2f}",
                 ),
+                tags=("main" if item["kind"] == "main" else "other",),
             )
 
         self.score_text.configure(state="normal")
