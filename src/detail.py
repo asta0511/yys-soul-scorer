@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 
 import cv2
@@ -60,6 +61,14 @@ BADGE_DISC_PAD = 1              # 裁的时候往外放几个像素
 BADGE_SEARCH_X = (1, 24)        # 相对卡片右边界向右的搜索范围
 BADGE_SEARCH_PAD_Y = 5          # 搜索区在副属性行上下各外扩多少
 BADGE_ASSIGN_TOL_RATIO = 0.6    # 与行中心的垂直距离超过这个比例 × 行高就不归给它
+
+# 徽章数字粘在值尾巴上的两种写法：'+16.71% 5'（有空格）和 '+16.71%5'（没空格）。
+# 百分比值后面直接跟一个 1~5 的数字只可能是徽章；固定值（如 486）不匹配，
+# 所以不会把数值尾巴咬掉。
+_BADGE_SPLIT = (
+    re.compile(r"^(?P<value>.+?)\s+(?P<digit>[1-5])$"),
+    re.compile(r"^(?P<value>.+%)(?P<digit>[1-5])$"),
+)
 
 # 号位文本「壹号位」…「陆号位」
 SLOT_LABELS = {"壹": 1, "贰": 2, "叁": 3, "肆": 4, "伍": 5, "陆": 6}
@@ -160,6 +169,29 @@ def _set_from_text(text: str, names: tuple[str, ...]) -> str | None:
     """取文本里出现的最长套装名。"""
     hits = [name for name in names if name in text]
     return max(hits, key=len) if hits else None
+
+
+def _strip_badge(items: list[OcrLine]) -> tuple[list[OcrLine], int | None]:
+    """把粘在属性值尾巴上的徽章数字拆出来。
+
+    详情面板的徽章（深/蓝圆盘 + 白字）常常被 OCR 连值一起读成一个文本框，
+    实测形如 '+16.71% 5'。拆出来的数字就是这条属性的强化次数；
+    值本身的文本要把数字去掉，否则会被解析成「旧值 → 最终值」。
+    """
+    if not items:
+        return items, None
+    last = items[-1]
+    for pattern in _BADGE_SPLIT:
+        match = pattern.match(last.text.strip())
+        if match is None:
+            continue
+        value = match.group("value").strip()
+        digit = int(match.group("digit"))
+        trimmed = OcrLine(rect=last.rect, text=value, score=last.score)
+        if not value:
+            return items[:-1], digit
+        return [*items[:-1], trimmed], digit
+    return items, None
 
 
 def read_badges(frame: np.ndarray, card: Card) -> dict[int, int]:
@@ -266,22 +298,31 @@ def analyze_detail(frame: np.ndarray, scale: int = 2) -> DetailPanel | None:
     if not attr_rows:
         return None
 
-    rows = [
-        _text_row(items, "main" if index == 0 else "sub")
-        for index, items in enumerate(attr_rows)
-    ]
-    lines = [
-        OcrLine(
-            rect=row.rect,
-            text="".join(item.text for item in items),
-            score=min(item.score for item in items),
+    rows: list[TextRow] = []
+    lines: list[OcrLine] = []
+    badges: dict[int, int] = {}
+    trimmed_rows: list[list[OcrLine]] = []
+    for index, items in enumerate(attr_rows):
+        kind = "main" if index == 0 else "sub"
+        if kind == "sub":
+            items, digit = _strip_badge(items)
+            if digit is not None:
+                badges[index] = digit
+        trimmed_rows.append(items)
+        rows.append(_text_row(items, kind))
+        lines.append(
+            OcrLine(
+                rect=rows[-1].rect,
+                text="".join(item.text for item in items),
+                score=min(item.score for item in items),
+            )
         )
-        for row, items in zip(rows, attr_rows)
-    ]
+    attr_rows = trimmed_rows
 
     # 徽章紧跟在属性值右边，所以卡片右边界要压在「副属性的值右边界」上——主属性
     # 字号更大、伸得更右（实测主属性到 830、副属性都止于 810），拿它当边界的话
-    # 搜索窗就滑过了徽章。
+    # 搜索窗就滑过了徽章。取中位数而不是最大值：某行的徽章被 OCR 连进值里时，
+    # 那一行的右边界会多出十几像素（实测 832），最大值会把整条搜索窗推过徽章。
     right_edges = [
         max(item.rect.x1 for item in items)
         for row, items in zip(rows, attr_rows)
@@ -290,7 +331,7 @@ def analyze_detail(frame: np.ndarray, scale: int = 2) -> DetailPanel | None:
     if not right_edges:
         right_edges = [max(item.rect.x1 for item in items) for items in attr_rows]
     left = min(row.rect.x for row in rows)
-    right = max(right_edges)
+    right = int(np.median(right_edges))
     top = rows[0].rect.y
     bottom = rows[-1].rect.y1
 
@@ -299,12 +340,16 @@ def analyze_detail(frame: np.ndarray, scale: int = 2) -> DetailPanel | None:
         rows=tuple(rows),
         header=Rect(x=left, y=top, w=right - left, h=0),
     )
+    # 文字里没拆出徽章的行，再用深色圆盘兜一次
+    if len(badges) < sum(1 for row in rows if row.kind == "sub"):
+        for index, value in read_badges(frame, card).items():
+            badges.setdefault(index, value)
     return DetailPanel(
         panel=panel,
         card=card,
         lines=lines,
         kinds=[row.kind for row in rows],
-        badges=read_badges(frame, card),
+        badges=badges,
         slot=slot,
         set_match=set_match,
     )
