@@ -72,6 +72,15 @@ CARD_INSET_X = (6, 5)
 # 真正的文字行峰值都在 16% 以上。用比例而不是绝对像素，换分辨率时不用重标定。
 CARD_ROW_PEAK_RATIO = 0.12
 
+# 行投影前把列的左右各裁掉这么多像素（基准分辨率），避开卡片的亮竖边框。
+# 边框常正好落在列边界上（内缩量不够时），一条 1~2 像素宽的亮竖线会让「这段是暗的」
+# 的行也各投出 1~2 个亮像素，刚好够到 min_pixels，于是把相邻的文字行和它下面的暗带
+# 粘成一段高带；这段高带被当成卡片头部，紧跟其后的属性行就被 limit 截掉。
+# 实测 1136x640 模拟器窗口只有最右列踩到（列宽比左中两列宽 2 像素、右边框更亮），
+# 表现为右下两张卡的「速度」行整行丢失。
+# 只裁投影用的 mask，行框仍按完整列宽给，所以不可能切到文字。
+CARD_EDGE_TRIM = 3
+
 
 @dataclass(frozen=True)
 class Rect:
@@ -327,6 +336,9 @@ def _cards_in_column(frame: np.ndarray, column: Rect, threshold: int) -> list[Ca
     pad = max(1, round(3 * scale))
 
     mask = _bright_mask(frame[column.to_slice()], threshold)
+    trim = max(1, round(CARD_EDGE_TRIM * scale))
+    if mask.shape[1] > 2 * trim:
+        mask = mask[:, trim:mask.shape[1] - trim]
     counts = mask.sum(axis=1)
     bands = _row_bands(
         mask,
