@@ -72,7 +72,10 @@
 python tools\read_panel.py --image samples\detail_panel.png
 python tools\read_panel.py --image samples\detail_panel_badge.png
 python tools\read_panel.py --image samples\batch_6cards.png
+python tools\read_panel.py --image samples\batch_6cards_emulator.png
 ```
+
+`batch_6cards_emulator.png` 是模拟器窗口（1136x640）下的批量 6 卡图，专门盯「最右列行投影被竖边框粘连」这个坑：模拟器窗口左右列宽会差 2 像素、右边框更亮，一不留神最右两张卡的速度行就会被截掉。
 
 ## 支持哪些界面
 
@@ -218,7 +221,10 @@ YYS/
 
 ```powershell
 .\.venv\Scripts\python.exe tools\read_panel.py --image samples\batch_6cards.png --no-save
+.\.venv\Scripts\python.exe tools\read_panel.py --image samples\batch_6cards_emulator.png --no-save
 ```
+
+第二条（模拟器 1136x640）是给行投影边界 bug 留的哨兵——最右列的亮竖边框一压到列边界上，右下两张卡的速度行会整行丢失，这条一跑就能看出来。
 
 ## 开发与标定工具
 
