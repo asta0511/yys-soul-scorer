@@ -70,6 +70,7 @@
 
 ```powershell
 python tools\read_panel.py --image samples\detail_panel.png
+python tools\read_panel.py --image samples\detail_panel_badge.png
 python tools\read_panel.py --image samples\batch_6cards.png
 ```
 
