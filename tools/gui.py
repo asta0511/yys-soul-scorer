@@ -26,6 +26,7 @@ import sys
 import threading
 import time
 import tkinter as tk
+import webbrowser
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
@@ -51,6 +52,10 @@ from src.score import ATTR_ID_TO_NAME, load_rules
 from src.win_capture import capture_client_area, enable_dpi_awareness, list_windows
 
 APP_TITLE = "御魂评分器"
+# 作者信息：界面顶栏署名 + 「项目主页」按钮直达这里；改仓库地址时只改这一处
+AUTHOR = "阳小楊"
+YYS_ACCOUNT = "鲛人之歌 · 阳小楊"
+REPO_URL = "https://github.com/asta0511/yys-soul-scorer"
 OUT_DIR = ROOT / "output" / "panel_read"
 
 # 与命令行保持一致：不改这两个参数，界面和 CLI 的结果就能对上
@@ -741,9 +746,15 @@ class SoulScorerApp:
         head = ttk.Frame(body)
         head.pack(side="top", fill="x")
         ttk.Label(head, text=APP_TITLE, font=self.title_font).pack(side="left")
-        ttk.Label(head, text="看屏幕算分数 · 不注入进程、不模拟点击", style="Subtitle.TLabel").pack(
-            side="left", padx=(10, 0)
-        )
+        ttk.Label(
+            head,
+            text=f"by {AUTHOR} · 阴阳师【{YYS_ACCOUNT}】· 看屏幕算分数，不注入进程、不模拟点击",
+            style="Subtitle.TLabel",
+        ).pack(side="left", padx=(10, 0))
+        # 一键直达仓库：按钮在右，地址标签贴着它左边，窄窗口下先挤掉标签再考虑按钮
+        self.repo_button = ttk.Button(head, text="项目主页 ↗", command=self._open_repo)
+        self.repo_button.pack(side="right")
+        ttk.Label(head, text=REPO_URL, style="Subtitle.TLabel").pack(side="right", padx=(0, 8))
 
         bar = ttk.Frame(body)
         bar.pack(side="top", fill="x", pady=(8, 0))
@@ -779,6 +790,10 @@ class SoulScorerApp:
             button = ttk.Button(body, text=text, command=command)
             button.pack(side="right", padx=(8, 0))
             self.export_buttons.append(button)
+
+    def _open_repo(self) -> None:
+        """一键直达项目主页（用系统默认浏览器打开）。"""
+        webbrowser.open(REPO_URL)
 
     def _build_body(self) -> None:
         # 左列：截图预览
