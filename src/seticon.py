@@ -9,6 +9,12 @@
 比对；每个套装取自己的最高分，最高分者即识别结果。除了绝对分数还要看与第二名的
 差距，两者都不够就不下结论——宁可返回 None，让上层退回「乐观上界」。
 
+匹配带 alpha 掩码：只有图标本体（alpha>0）的像素参与打分，模板四角那圈透明区不计。
+不掩的话，四角会被填成统一的卡片底色，而实机里那圈其实是暗蓝背景、渐变、以及号位
+识别要用的浅蓝角标——这些「模板解释不了」的亮块会同时压低正确套装的分数、抬高错误
+套装的分数。实测同一张油赤子图标，不加掩码时与第二名的差距只有 0.06（低于门槛，判
+不出），加了掩码后差距稳定在 0.18~0.24，四张卡的分数也变得整齐。
+
 标定基准：阴阳师 PC 端客户区 1402x790，此时图标直径约 59 像素。
 
 模板匹配的峰值位置同时就是图标本身的位置，所以顺带也能拿到图标的外接方框，
@@ -129,26 +135,29 @@ class SetMatcher:
 
     def __init__(self, icon_dir: Path | None = None) -> None:
         self._icons = _load_icons(icon_dir or ICON_DIR)
-        self._cache: dict[int, list[tuple[str, np.ndarray, np.ndarray]]] = {}
+        self._cache: dict[int, list[tuple[str, np.ndarray, np.ndarray, np.ndarray]]] = {}
 
-    def _templates(self, frame: np.ndarray) -> list[tuple[str, np.ndarray, np.ndarray]]:
-        """把模板缩放成「乘过 alpha 的灰度贡献 ga」和「透明权重 inv」。
+    def _templates(self, frame: np.ndarray) -> list[tuple[str, np.ndarray, np.ndarray, np.ndarray]]:
+        """把模板缩放成「乘过 alpha 的灰度贡献 ga」「透明权重 inv」和「alpha 掩码 mask」。
 
         合成后的灰度是线性的：gray(art*a + bg*(1-a)) = a*gray(art) + (1-a)*gray(bg)，
         所以 ga = a*gray(art) 与 inv = 1-a 可以预先算好，底色随卡片现取。
+
+        mask 标出 alpha>0 的像素，交给 matchTemplate 让透明四角不参与打分。
         """
         key = round(BASE_DIAM * _ui_scale(frame))
         cached = self._cache.get(key)
         if cached is not None:
             return cached
 
-        built: list[tuple[str, np.ndarray, np.ndarray]] = []
+        built: list[tuple[str, np.ndarray, np.ndarray, np.ndarray]] = []
         for step in DIAM_STEPS:
             diam = max(8, round(key * step))
             for name, gray, alpha in self._icons:
                 a = cv2.resize(alpha, (diam, diam), interpolation=cv2.INTER_AREA)
                 g = cv2.resize(gray, (diam, diam), interpolation=cv2.INTER_AREA)
-                built.append((name, a * g, 1.0 - a))
+                inv = 1.0 - a
+                built.append((name, a * g, inv, (inv < 0.996).astype(np.uint8)))
         self._cache[key] = built
         return built
 
@@ -175,10 +184,14 @@ class SetMatcher:
         gray = cv2.cvtColor(region, cv2.COLOR_BGR2GRAY).astype(np.float32)
 
         best: dict[str, tuple[float, Rect]] = {}
-        for name, ga, inv in self._templates(frame):
+        for name, ga, inv, mask in self._templates(frame):
             if ga.shape[0] > gray.shape[0] or ga.shape[1] > gray.shape[1]:
                 continue
-            result = cv2.matchTemplate(gray, ga + bg_gray * inv, cv2.TM_CCOEFF_NORMED)
+            result = cv2.matchTemplate(
+                gray, ga + bg_gray * inv, cv2.TM_CCOEFF_NORMED, mask=mask
+            )
+            # 掩码区域内灰度方差为 0 的窗口会算出 NaN/inf，minMaxLoc 遇到会乱选位置。
+            result[~np.isfinite(result)] = -2.0
             _, top, _, loc = cv2.minMaxLoc(result)
             if top > best.get(name, (-2.0, None))[0]:
                 diam = ga.shape[0]
