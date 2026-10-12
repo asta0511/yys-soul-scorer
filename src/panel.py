@@ -64,6 +64,15 @@ CARD_ROW_MIN_FILL = 0.15
 # 卡片最小宽度（像素），用来滤掉边框、徽章之类的小块
 CARD_MIN_WIDTH = 80
 
+# 卡片下方那片背景的底色和卡片几乎一样，会整片落进底色掩码。它是一条横贯大半个
+# 网格的连续宽带，比任何一张卡都宽；不管它的话，它既会把「正文行」的判定和列计数
+# 的分母一起抬高，也会让最宽的那行成为 peak：实测一屏两张卡（1200x676）时正文行
+# 从 ~117 虚增到 231、列阈值随之到 115，而左边那张卡自身只投出 113，差两个像素被
+# 整列刷掉，只剩右边一张。做法是先按「每行连续段」的中位宽度估出卡片宽度，再把
+# 明显更宽（超过这个倍数）的段抹掉——卡片段宽度恒定，背景片通常翻倍，中位数落在
+# 卡片这一侧。
+CARD_RUN_MAX_FACTOR = 1.6
+
 # 卡片正文左右各内缩多少像素：左侧避开「新」标签，右侧避开强化次数徽章
 CARD_INSET_X = (6, 5)
 
@@ -287,6 +296,31 @@ def _card_bg_color(frame: np.ndarray) -> np.ndarray:
     return flat[keys == best].mean(axis=0)
 
 
+def _drop_oversized_runs(mask: np.ndarray, min_width: int) -> np.ndarray:
+    """把每行里明显宽于「卡片宽度」的连续段抹掉（就地改并返回）。
+
+    卡片下方那片同色背景在掩码里是一条横贯大半个网格的宽带，宽度约为一张卡的两倍。
+    卡片宽度用所有够长的连续段的中位宽度估计（卡片段占多数，中位数落在卡片这一侧），
+    再把超过 CARD_RUN_MAX_FACTOR 倍的段清掉。
+    """
+    diff = np.diff(mask, axis=1, prepend=0, append=0)
+    starts = np.argwhere(diff == 1)
+    ends = np.argwhere(diff == -1)
+    if starts.shape[0] == 0 or starts.shape[0] != ends.shape[0]:
+        return mask
+
+    widths = ends[:, 1] - starts[:, 1]
+    long_enough = widths >= min_width
+    if not long_enough.any():
+        return mask
+
+    limit = float(np.median(widths[long_enough])) * CARD_RUN_MAX_FACTOR
+    oversized = widths > limit
+    for (row, start), width in zip(starts[oversized], widths[oversized]):
+        mask[row, start:start + width] = 0
+    return mask
+
+
 def _find_columns(frame: np.ndarray, grid: Rect) -> list[Rect]:
     """按卡片底色找出每一列的横向范围。"""
     scale = _ui_scale(frame)
@@ -296,6 +330,7 @@ def _find_columns(frame: np.ndarray, grid: Rect) -> list[Rect]:
     bg = _card_bg_color(frame)
     region = frame[grid.to_slice()].astype(np.int32)
     mask = (np.abs(region - bg).sum(axis=2) < CARD_BG_TOL).astype(np.uint8)
+    mask = _drop_oversized_runs(mask, min_width)
 
     # 先圈出卡片正文所在的那几行，列投影只在这些行上做。卡片上下的背景色有时和
     # 卡片底色很接近，一起算进来的话没卡的地方也会投出很高的列（实测一屏只有一行
