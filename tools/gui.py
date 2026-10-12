@@ -30,7 +30,8 @@ import webbrowser
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-ROOT = Path(__file__).resolve().parents[1]
+# 打包（PyInstaller）后资源被解到 sys._MEIPASS，源码运行时就是仓库根目录
+ROOT = Path(getattr(sys, "_MEIPASS", None) or Path(__file__).resolve().parents[1])
 sys.path.insert(0, str(ROOT))
 
 import cv2
@@ -39,6 +40,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageTk
 
 from src.ocr import annotate
 from src.parse import format_value, unparsed
+from src.paths import writable_root
 from src.pipeline import (
     MODE_BATCH,
     MODE_SINGLE_CARD,
@@ -56,7 +58,8 @@ APP_TITLE = "御魂评分器"
 AUTHOR = "阳小楊"
 YYS_ACCOUNT = "鲛人之歌 · 阳小楊"
 REPO_URL = "https://github.com/asta0511/yys-soul-scorer"
-OUT_DIR = ROOT / "output" / "panel_read"
+# 导出产物写到 exe 旁边（打包后不能写进只读的 _MEIPASS 临时目录）
+OUT_DIR = writable_root() / "output" / "panel_read"
 
 # 与命令行保持一致：不改这两个参数，界面和 CLI 的结果就能对上
 THRESHOLD = 100

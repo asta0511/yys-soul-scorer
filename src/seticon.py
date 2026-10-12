@@ -26,8 +26,9 @@ import cv2
 import numpy as np
 
 from .panel import Card, Rect, _ui_scale
+from .paths import resource_root
 
-ICON_DIR = Path(__file__).resolve().parents[1] / "data" / "soul_icons"
+ICON_DIR = resource_root() / "data" / "soul_icons"
 
 # 客户区 790 高时套装图标的直径（像素）
 BASE_DIAM = 59

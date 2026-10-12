@@ -21,8 +21,9 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RULE_PATH = ROOT / "rules" / "中练度标准.yysrule.json"
+from src.paths import resource_root
+
+DEFAULT_RULE_PATH = resource_root() / "rules" / "中练度标准.yysrule.json"
 
 # 面板里显示的属性名 -> 规则里的属性标识符。
 # 「暴击伤害」在平安志里简写成「暴伤」，两个都收进来。

@@ -12,6 +12,11 @@ __pycache__/
 output/
 temp/
 
+# PyInstaller 打包产物
+build/
+dist/
+*.spec
+
 # 编辑器 / 工具配置
 .idea/
 .vscode/
